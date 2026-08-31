@@ -220,8 +220,8 @@ async function loadWords() {
 
     secretWordTokens = tokenize(dailyWord);
 
-    console.log('Mai szó:', dailyWord);
-    console.log('Szavak száma:', wordList.length);
+    //console.log('Mai szó:', dailyWord);
+    //console.log('Szavak száma:', wordList.length);
 
     const restored = loadGameState();
 
