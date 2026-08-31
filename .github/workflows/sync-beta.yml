@@ -1,0 +1,43 @@
+name: Sync UAT to BETA
+
+on:
+  push:
+    branches:
+      - UAT
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout UAT
+        uses: actions/checkout@v4
+        with:
+          ref: UAT
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check BETA_TOKEN
+        env:
+          BETA_TOKEN: ${{ secrets.BETA_TOKEN }}
+        run: |
+          if [ -z "$BETA_TOKEN" ]; then
+            echo "BETA_TOKEN is EMPTY"
+            exit 1
+          else
+            echo "BETA_TOKEN is PRESENT"
+          fi
+
+      - name: Push to BETA
+        env:
+          GH_TOKEN: ${{ secrets.BETA_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          gh auth setup-git
+
+          git remote add beta https://github.com/djanoska/szofejto-beta.git
+
+          git push beta HEAD:main --force
