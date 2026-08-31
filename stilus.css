@@ -9,6 +9,7 @@
   --accent: #2b0202;
 }
 
+/* Kijelölések letiltása és teljes reszponzivitás előkészítése */
 * { 
   box-sizing: border-box; 
   margin: 0; 
@@ -24,25 +25,24 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  /* Kényszerítjük, hogy mobil böngészőben se lehessen görgetni */
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  height: 100vh;
+  height: 100dvh; /* A legújabb mobil böngészőkhöz, ami figyeli a felugró sávokat */
   overflow: hidden;
+  position: fixed;
+  width: 100%;
 }
 
 header {
   width: 100%;
-  padding: 8px; /* Kisebb padding */
-  text-align: center;
+  height: 8vh; /* Fixen a képernyőmagasság 8%-a */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-bottom: 1px solid var(--border);
 }
 
 header h1 {
-  font-size: 1.5rem; /* Kisebb fejléc */
+  font-size: 4vh; /* A betűméret is a magassághoz igazodik */
   font-weight: 700;
   color: var(--accent);
 }
@@ -53,72 +53,75 @@ header h1 {
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 420px;
-  padding: 6px;
-  height: calc(100% - 40px); /* Kiszámítja a pontos maradék helyet */
+  max-width: 500px; /* Tablet és desktop korlát */
+  padding: 2vh 12px; /* Függőleges padding a képernyőhöz igazítva */
+  height: 92vh;
 }
 
 #msg {
   text-align: center;
   font-weight: 600;
-  font-size: 0.85rem;
-  height: 18px;
+  font-size: 2.2vh;
+  height: 3vh;
   color: var(--accent);
 }
 
+/* A RÁCS AUTOMATIKUSAN SKÁLÁZÓDIK A SZABAD HELYRE */
 #grid {
   display: grid;
   grid-template-rows: repeat(8, 1fr);
-  gap: 4px;
+  gap: 0.6vh;
   margin: auto;
   width: 100%;
-  max-width: 230px; /* Szűkebb rács, hogy magasságban is kisebb legyen */
+  max-width: 320px;
+  max-height: 48vh; /* A rács sosem foglalhat el többet a képernyő felénél */
 }
 
 .row {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 4px;
+  gap: 0.6vh;
 }
 
 .cell {
   aspect-ratio: 1;
   border: 1.5px solid var(--border);
   background: var(--cell-bg);
-  border-radius: 6px;
+  border-radius: 12%; /* Százalékos kerekítés, mindig arányos marad */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem; /* Kisebb betűk a négyzetekben */
+  font-size: 3vh; /* A beírt betű mérete a dobozhoz igazodik */
   font-weight: bold;
   text-transform: uppercase;
 }
 
+/* A BILLENTYŰZET MINDIG A KIJELZŐ ALJÁN MARAD */
 #keyboard {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 0.6vh;
   width: 100%;
-  padding-bottom: env(safe-area-inset-bottom, 5px); /* Biztonsági sáv az Android alsó gombjai miatt */
+  margin-top: auto;
 }
 
 .keyboard-row {
   display: flex;
   justify-content: center;
-  gap: 3px;
+  gap: 1vw; /* A gombok közötti távolság a kijelző szélességétől függ */
   width: 100%;
 }
 
 .key {
   flex: 1;
-  height: 30px; /* Rendkívül lapos, kompakt gombok */
+  height: 5.2vh; /* A gomb magassága mindig a képernyőmagasság 5.2%-a */
   background: #e2dbcd;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.75rem; /* Kisebb betűk a billentyűzeten */
+  font-size: 1.8vh; /* Mindig olvasható méretű billentyűk */
   font-weight: bold;
   cursor: pointer;
   touch-action: manipulation;
@@ -128,18 +131,10 @@ header h1 {
   flex: 2; 
   background: var(--ink); 
   color: var(--bg); 
-  font-size: 0.72rem;
+  font-size: 1.6vh;
 }
 
+/* Gombok színes állapotai */
 .key.correct { background: var(--correct) !important; color: white !important; }
 .key.present { background: var(--present) !important; color: white !important; }
 .key.absent { background: var(--absent) !important; color: white !important; opacity: 0.5; }
-
-/* Különleges szabály extra kicsi kijelzőkhöz (pl. ha a magasság 600px alatti a Messengerben) */
-@media (max-height: 600px) {
-  header h1 { font-size: 1.2rem; }
-  .key { height: 26px; font-size: 0.7rem; }
-  #grid { max-width: 190px; gap: 2px; }
-  .row { gap: 2px; }
-  .cell { font-size: 0.95rem; border-width: 1px; }
-}
