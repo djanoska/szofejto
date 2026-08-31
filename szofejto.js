@@ -133,19 +133,18 @@ function checkGuess() {
     const cell = document.getElementById(`cell-${currentAttempt}-${i}`);
     if (cell) cell.classList.add(statuses[i]);
 
-    const currentLetter = guessLower[i]; // A tippelt betű kisbetűsen (pl. "é")
-    const baseKey = getBaseKey(currentLetter); // Az alapbetű (pl. "e")
+    const currentLetter = guessLower[i]; // A játékos által beírt pontos betű (pl. "á")
 
-    // JAVÍTÁS: Megkeressük az ÖSSZES gombot, ami az alapbetűhöz VAGY a pontos ékezetes betűhöz tartozik
+    // Csak azokat a gombokat keressük meg, amik pontosan erre a betűre hallgatnak
     const keyBtns = document.querySelectorAll(`#keyboard .key`);
     
     keyBtns.forEach(keyBtn => {
-      // Kiolvassuk a data-key-t, ha nincs, akkor a gomb feliratát használjuk, és kisbetűsítjük
+      // Kiolvassuk a data-key-t, ha nincs, akkor a gomb szövegét használjuk, kisbetűsítve
       const btnKeyAttr = keyBtn.getAttribute('data-key');
       const btnKey = (btnKeyAttr ? btnKeyAttr : keyBtn.textContent).trim().toLowerCase();
 
-      // Ha a gomb megegyezik a tippelt betűvel (pl. "é") VAGY az alapbetűjével (pl. "e")
-      if (btnKey === currentLetter || btnKey === baseKey) {
+      // SZIGORÚ EGYEZÉS: Csak a ténylegesen leütött betű gombját bántjuk!
+      if (btnKey === currentLetter) {
         
         // Wordle szabály: A már zöld (correct) gombot semmi nem írhatja felül
         if (!keyBtn.classList.contains('correct')) {
