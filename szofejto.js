@@ -4,20 +4,8 @@ const WORD_LEN = 5;
 
 // Ékezet-leképezési térkép a billentyűzet színezéséhez
 const ACCENT_MAP = {
-  'a': ['a'],
-  'á': ['á'],
-  'e': ['e'],
-  'é': ['é'],
-  'i': ['i'],
-  'í': ['í'],
-  'o': ['o'],
-  'ó': ['ó'],
-  'ö': ['ö'],
-  'ő': ['ő'],
-  'u': ['u'],
-  'ú': ['ú'],
-  'ü': ['ü'],
-  'ű': ['ű']
+  'a': ['a', 'á'], 'e': ['e', 'é'], 'i': ['i', 'í'], 
+  'o': ['o', 'ó', 'ö', 'ő'], 'u': ['u', 'ú', 'ü', 'ű']
 };
 
 let wordList = [];
@@ -140,60 +128,28 @@ function checkGuess() {
     }
   }
 
-  // JAVÍTÁS: Animációk indítása és tűpontos billentyűzet-színezés
+  // Megjelenítés és billentyűzet színezés
   for (let i = 0; i < WORD_LEN; i++) {
     const cell = document.getElementById(`cell-${currentAttempt}-${i}`);
-    if (cell) {
-      // 1. Egyszerre adjuk hozzá a státuszt és a .flip osztályt a stabil animációhoz
-      cell.classList.add(statuses[i], 'flip');
-    }
+    if (cell) cell.classList.add(statuses[i]);
 
-    const currentLetter = guessLower[i]; // A leütött betű pontos karaktere
-
-    // Megkeressük az összes billentyűzet gombot
-    const keyBtns = document.querySelectorAll(`#keyboard .key`);
+    // Intelligens gombkeresés az alapbetűk alapján
+    const baseKey = getBaseKey(guessLower[i]);
+    const keyBtn = document.querySelector(`#keyboard .key[data-key='${baseKey}']`);
     
-    keyBtns.forEach(keyBtn => {
-      // JAVÍTÁS: Ha a data-key hibás a HTML-ben, a gomb látható feliratát vesszük alapul!
-      const btnKeyAttr = keyBtn.getAttribute('data-key');
-      const btnKey = (btnKeyAttr ? btnKeyAttr : keyBtn.textContent).trim().toLowerCase();
-
-      // Ha a gomb felirata pontosan megegyezik a beírt betűvel
-      if (btnKey === currentLetter) {
-        
-        // Wordle szabály: Zöld gombot nem írunk felül
-        if (!keyBtn.classList.contains('correct')) {
-          if (statuses[i] === 'correct') {
-            keyBtn.classList.remove('present', 'absent');
-            keyBtn.classList.add('correct');
-          } else if (statuses[i] === 'present') {
-            if (!keyBtn.classList.contains('present')) {
-              keyBtn.classList.add('present');
-            }
-          } else if (statuses[i] === 'absent') {
-            if (!keyBtn.classList.contains('present')) {
-              keyBtn.classList.add('absent');
-            }
-          }
+    if (keyBtn) {
+      if (!keyBtn.classList.contains('correct')) {
+        if (statuses[i] === 'correct') {
+          keyBtn.classList.remove('present', 'absent');
+          keyBtn.classList.add('correct');
+        } else if (statuses[i] === 'present') {
+          keyBtn.classList.add('present');
+        } else if (statuses[i] === 'absent' && !keyBtn.classList.contains('present')) {
+          keyBtn.classList.add('absent');
         }
       }
-    });
+    }
   }
-
-  if (guessString === secretWordTokens.join('').toLowerCase()) {
-    showMsg("Gratulálok, eltaláltad!");
-    gameOver = true;
-    return;
-  }
-
-  currentAttempt++;
-  currentGuessTokens = [];
-
-  if (currentAttempt >= MAX_ATTEMPTS) {
-    showMsg(`Vége! A szó: ${secretWordTokens.join('').toUpperCase()}`);
-    gameOver = true;
-  }
-}
 
   if (guessString === secretWordTokens.join('').toLowerCase()) {
     showMsg("Gratulálok, eltaláltad!");
