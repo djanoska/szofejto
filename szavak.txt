@@ -1147,6 +1147,7 @@ datív
 dátum
 dauer
 Dávid
+D-dúr
 deáki
 decis
 dedós
@@ -2373,6 +2374,7 @@ hiéna
 higany
 hígít
 hígul
+hi-hi
 híján
 himba
 hímen
@@ -2513,6 +2515,7 @@ igazi
 ígérő
 igető
 igric
+így-úgy
 igényű
 igéző
 iható
@@ -2900,6 +2903,7 @@ kezes
 kezez
 khaki
 khmer
+ki-be
 kivisz
 kiadó
 kibic
@@ -6281,12 +6285,42 @@ zsúpol
 zsurló
 zsűriz
 zsüror
+-ajkú
+-arcú
+-buzi
+-bőrű
+-falu
+-fejű
+-felé
+-fogú
+-jaid
+-jaik
+-jeid
+-jeik
+-ként
+-lapu
+-lábú
+-morf
+-nevű
+-nyakú
+-orrú
+-szemű
+-szerű
+-színű
+-szívű
+-súlyú
+-tanya
+-ujjú
+-álló
+-állú
+-üzem
 Dirca
 Doris
 Elymus
 Endre
 Erdély
 Eszter
+F-lyuk
 Fiber
 Flóra
 Félix
@@ -6376,6 +6410,7 @@ Tokió
 Trója
 Varsó
 Vince
+a-dúr
 abból
 afrit
 aftás
@@ -6395,7 +6430,6 @@ anyagé
 apadó
 aplit
 apnoé
-aran>
 arkusz
 arról
 aszter
@@ -6451,7 +6485,6 @@ butil
 butén
 buzis
 buzul
-bábu>
 bájak
 bámia
 básony
@@ -6555,6 +6588,7 @@ díszágy
 dögös
 dúcfa
 dúsan
+e-húr
 ebben
 ebből
 ebdög
@@ -6574,7 +6608,6 @@ elégő
 eléri
 előíz
 elülő
-embe>
 engem
 ennek
 enyhely
@@ -6588,6 +6621,7 @@ erika
 eskór
 esélyt
 ettől
+ez-az
 fabél
 facsap
 fafej
@@ -6606,7 +6640,6 @@ febr.
 fejcső
 fejek
 fekecs
-felé>
 feszke
 filmé
 flemm
@@ -6647,6 +6680,7 @@ fénylő
 férje
 férjé
 fószer
+fő-fő
 főkör
 főszám
 főszél
@@ -6658,6 +6692,7 @@ fűzér
 fűzők
 fülek
 fülig
+g-húr
 gagát
 ganés
 gebasz
@@ -6716,12 +6751,14 @@ helyőr
 herék
 heted
 hexán
+hi-fi
 hiba.
 hibák
 hirig
 holdé
 hollá
 honőr
+hu-hu
 hulló
 hunok
 huzag
@@ -6737,7 +6774,6 @@ hídfű
 hídív
 hígan
 hílus
-híre>
 hírek
 hívek
 hívók
@@ -6752,6 +6788,7 @@ húgyoz
 hücpe
 hülyén
 hülyéé
+i-vas
 ikrek
 iktusz
 ileum
@@ -6803,6 +6840,7 @@ kenyai
 kenáf
 kepél
 kezek
+ki-ki
 kiabá
 kicsik
 kitől
@@ -6829,7 +6867,6 @@ kugár
 kulán
 kumét
 kuszán
-kutya>
 kutyáé
 kádnyi
 kémek
@@ -6858,7 +6895,6 @@ közte
 kúrás
 kúszva
 lakni
-lakó>
 lamúr
 laoszi
 lapok
@@ -6901,7 +6937,6 @@ létok
 lóedző
 lófar
 lólap
-lóra!
 lóról
 lószar
 lőtáv
@@ -6935,7 +6970,6 @@ miből
 mikro
 minor
 minósz
-mire?
 miről
 mitra
 moher
@@ -6946,7 +6980,6 @@ monóm
 morgó
 mosni
 mucsán
-munk>
 márc.
 mások
 mászva
@@ -7010,7 +7043,6 @@ ozéna
 pacás
 pages
 paion
-pajz>
 pangó
 parin
 parszi
@@ -7058,7 +7090,6 @@ rajon
 rallye
 ramus
 rapir
-reccs!
 right
 rigyet
 rittyó
@@ -7095,7 +7126,6 @@ savbő
 savít
 scaup
 sebet
-sekk!
 selyma
 serif
 serte
@@ -7172,7 +7202,6 @@ szárak
 szárfa
 szárnyé
 százegy
-szégye>
 szélfű
 szélid
 szérűs
@@ -7222,11 +7251,10 @@ taken
 talpi
 talán
 tapod
-tart>
 tavaj
+tbc-s
 tehát
 tejkő
-tele>
 telik
 telve
 telés
@@ -7261,7 +7289,6 @@ tunyán
 tweed
 tyuhaj
 tyúkól
-tyűha!
 táján
 társa
 téged
@@ -7282,6 +7309,7 @@ tűlyuk
 tűléc
 tűszár
 tűtok
+tü-tü
 tüzet
 ugató
 ujjak
@@ -7328,7 +7356,6 @@ vizei
 vlach
 vmről
 vmnél
-vmne>
 vmért
 volna
 vákum
@@ -7436,6 +7463,7 @@ zűrös
 ívhúr
 ívsor
 ízköz
+ó-láb
 óniksz
 ónízű
 őneki
@@ -7450,6 +7478,7 @@ zűrös
 öníró
 önöké
 összet
+öt-öt
 ötkor
 övsál
 övéik
