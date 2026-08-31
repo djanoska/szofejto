@@ -96,6 +96,10 @@ header h1 {
   text-transform: uppercase;
 }
 
+.cell.correct { background: var(--correct); color: white; border-color: var(--correct); }
+.cell.present { background: var(--present); color: white; border-color: var(--present); }
+.cell.absent { background: var(--absent); color: white; border-color: var(--absent); }
+
 /* A BILLENTYŰZET MINDIG A KIJELZŐ ALJÁN MARAD */
 #keyboard {
   display: flex;
@@ -138,3 +142,4 @@ header h1 {
 .key.correct { background: var(--correct) !important; color: white !important; }
 .key.present { background: var(--present) !important; color: white !important; }
 .key.absent { background: var(--absent) !important; color: white !important; opacity: 0.5; }
+
