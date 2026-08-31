@@ -3,9 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
   <title>Szófejtő</title>
-  <link rel="stylesheet" href="stilus.css?v=12">
+
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="stilus.css?v=15">
 </head>
+
 <body>
 
   <header>
@@ -13,37 +17,103 @@
   </header>
 
   <div id="game-container">
+
     <div id="msg"></div>
+
     <div id="grid"></div>
-    
-   <div id="keyboard">
+
+
+    <div id="keyboard">
+
       <!-- 1. SOR -->
       <div class="keyboard-row">
-        <button class="key" data-key="q">Q</button><button class="key" data-key="w">W</button><button class="key" data-key="e">E</button><button class="key" data-key="é">É</button><button class="key" data-key="r">R</button><button class="key" data-key="t">T</button><button class="key" data-key="z">Z</button><button class="key" data-key="u">U</button><button class="key" data-key="ú">Ú</button><button class="key" data-key="ü">Ü</button><button class="key" data-key="ű">Ű</button>
+        <button class="key" data-key="q">Q</button>
+        <button class="key" data-key="w">W</button>
+        <button class="key" data-key="e">E</button>
+        <button class="key" data-key="é">É</button>
+        <button class="key" data-key="r">R</button>
+        <button class="key" data-key="t">T</button>
+        <button class="key" data-key="z">Z</button>
+        <button class="key" data-key="u">U</button>
+        <button class="key" data-key="ú">Ú</button>
+        <button class="key" data-key="ü">Ü</button>
+        <button class="key" data-key="ű">Ű</button>
       </div>
+
+
       <!-- 2. SOR -->
       <div class="keyboard-row">
-        <button class="key" data-key="i">I</button><button class="key" data-key="í">Í</button><button class="key" data-key="o">O</button><button class="key" data-key="ó">Ó</button><button class="key" data-key="p">P</button><button class="key" data-key="a">A</button><button class="key" data-key="á">Á</button><button class="key" data-key="s">S</button><button class="key" data-key="d">D</button><button class="key" data-key="f">F</button>
+        <button class="key" data-key="i">I</button>
+        <button class="key" data-key="í">Í</button>
+        <button class="key" data-key="o">O</button>
+        <button class="key" data-key="ó">Ó</button>
+        <button class="key" data-key="p">P</button>
+        <button class="key" data-key="a">A</button>
+        <button class="key" data-key="á">Á</button>
+        <button class="key" data-key="s">S</button>
+        <button class="key" data-key="d">D</button>
+        <button class="key" data-key="f">F</button>
       </div>
+
+
       <!-- 3. SOR -->
       <div class="keyboard-row">
-        <button class="key" data-key="g">G</button><button class="key" data-key="h">H</button><button class="key" data-key="j">J</button><button class="key" data-key="k">K</button><button class="key" data-key="l">L</button><button class="key" data-key="y">Y</button><button class="key" data-key="x">X</button><button class="key" data-key="c">C</button><button class="key" data-key="v">V</button><button class="key" data-key="b">B</button>
+        <button class="key" data-key="g">G</button>
+        <button class="key" data-key="h">H</button>
+        <button class="key" data-key="j">J</button>
+        <button class="key" data-key="k">K</button>
+        <button class="key" data-key="l">L</button>
+        <button class="key" data-key="y">Y</button>
+        <button class="key" data-key="x">X</button>
+        <button class="key" data-key="c">C</button>
+        <button class="key" data-key="v">V</button>
+        <button class="key" data-key="b">B</button>
       </div>
-      <!-- 4. SOR: Többjegyű betűk és maradék magánhangzók -->
+
+
+      <!-- 4. SOR -->
       <div class="keyboard-row">
-        <button class="key" data-key="n">N</button><button class="key" data-key="m">M</button><button class="key" data-key="ö">Ö</button><button class="key" data-key="ő">Ő</button><button class="key" data-key="cs">CS</button><button class="key" data-key="dz">DZ</button><button class="key" data-key="dzs">DZS</button><button class="key" data-key="gy">GY</button><button class="key" data-key="ly">LY</button><button class="key" data-key="ny">NY</button>
+        <button class="key" data-key="n">N</button>
+        <button class="key" data-key="m">M</button>
+        <button class="key" data-key="ö">Ö</button>
+        <button class="key" data-key="ő">Ő</button>
+        <button class="key" data-key="cs">CS</button>
+        <button class="key" data-key="dz">DZ</button>
+        <button class="key" data-key="dzs">DZS</button>
+        <button class="key" data-key="gy">GY</button>
+        <button class="key" data-key="ly">LY</button>
+        <button class="key" data-key="ny">NY</button>
       </div>
-      <!-- 5. SOR: Maradék többjegyűek -->
+
+
+      <!-- 5. SOR -->
       <div class="keyboard-row">
-        <button class="key wide" data-key="back">TÖRÖL</button><button class="key" data-key="sz">SZ</button><button class="key" data-key="ty">TY</button><button class="key" data-key="zs">ZS</button><button class="key wide" data-key="enter">ENTER</button>
+        <button class="key wide" data-key="back">TÖRÖL</button>
+
+        <button class="key" data-key="sz">SZ</button>
+        <button class="key" data-key="ty">TY</button>
+        <button class="key" data-key="zs">ZS</button>
+
+        <button class="key wide" data-key="enter">ENTER</button>
       </div>
-      <!-- 6. SOR: TÖRÖL és ENTER EGYMÁS MELLETT
+
+
+      <!--
+      6. SOR – jelenleg nincs használatban
+
       <div class="keyboard-row">
         <button class="key wide" data-key="back">TÖRÖL</button>
         <button class="key wide" data-key="enter">ENTER</button>
       </div>
-    </div>-->
+      -->
 
-  <script src="szofejto.js?v=12"></script>
+
+    </div>
+
+  </div>
+
+
+  <script src="szofejto.js?v=15"></script>
+
 </body>
 </html>

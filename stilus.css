@@ -2,145 +2,325 @@
   --bg: #f5f2eb;
   --ink: #23201b;
   --border: #c9bfa8;
-  --correct: #23a942; /* Élénk, modern zöld */
+  --correct: #23a942;
   --present: #b38600;
   --absent: #5c564a;
   --cell-bg: #ffffff;
   --accent: #2b0202;
 }
 
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
-  user-select: none; 
-  -webkit-user-select: none; 
+
+/* ======================================================
+   ALAP
+   ====================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+
+  user-select: none;
+  -webkit-user-select: none;
 }
+
 
 body {
   background: var(--bg);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
   height: 100vh;
+
   overflow: hidden;
 }
+
+
+/* ======================================================
+   FEJLÉC
+   ====================================================== */
 
 header {
   width: 100%;
   padding: 12px;
+
   text-align: center;
+
   border-bottom: 1px solid var(--border);
 }
+
 
 header h1 {
   font-size: 1.8rem;
   font-weight: 700;
+
   color: var(--accent);
 }
+
+
+/* ======================================================
+   JÁTÉK
+   ====================================================== */
 
 #game-container {
   flex: 1;
+
   display: flex;
   flex-direction: column;
+
   justify-content: space-between;
+
   width: 100%;
   max-width: 480px;
+
   padding: 5px;
 }
 
+
+/* ======================================================
+   ÜZENET
+   ====================================================== */
+
 #msg {
   text-align: center;
+
   font-weight: 600;
+
   height: 15px;
+
   color: var(--accent);
 }
 
+
+/* ======================================================
+   JÁTÉKTÁBLA
+   ====================================================== */
+
 #grid {
   display: grid;
-  grid-template-rows: repeat(8, 1fr);
+
+  grid-template-rows: repeat(8, auto);
+
   gap: 4px;
+
   margin: auto;
+
   width: 100%;
   max-width: 290px;
 }
 
+
+/* ======================================================
+   SOR
+   ====================================================== */
+
 .row {
   display: grid;
+
   grid-template-columns: repeat(5, 1fr);
+
   gap: 4px;
+
+  width: 100%;
 }
+
+
+/* ======================================================
+   KOCKÁK
+   ====================================================== */
 
 .cell {
-  aspect-ratio: 1;
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  min-width: 0;
+  min-height: 0;
+
   border: 1.5px solid var(--border);
+
   background: var(--cell-bg);
+
   border-radius: 6px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   font-size: 1.2rem;
+
   font-weight: bold;
+
   text-transform: uppercase;
+
+  position: relative;
+
+  z-index: 1;
 }
 
-.cell.correct { background: var(--correct); color: white; border-color: var(--correct); }
-.cell.present { background: var(--present); color: white; border-color: var(--present); }
-.cell.absent { background: var(--absent); color: white; border-color: var(--absent); }
+
+/* ======================================================
+   KOCKA SZÍNEK
+   ====================================================== */
+
+.cell.correct {
+  background: var(--correct);
+
+  color: white;
+
+  border-color: var(--correct);
+}
+
+
+.cell.present {
+  background: var(--present);
+
+  color: white;
+
+  border-color: var(--present);
+}
+
+
+.cell.absent {
+  background: var(--absent);
+
+  color: white;
+
+  border-color: var(--absent);
+}
+
+
+/* ======================================================
+   BILLENTYŰZET
+   ====================================================== */
 
 #keyboard {
   display: flex;
+
   flex-direction: column;
+
   gap: 3px;
+
   width: 100%;
+
   padding-bottom: 2px;
 }
 
+
 .keyboard-row {
   display: flex;
+
   justify-content: center;
+
   gap: 3px;
-	width: 100%;
+
+  width: 100%;
 }
+
+
+/* ======================================================
+   BILLENTYŰK
+   ====================================================== */
 
 .key {
   flex: 1;
+
   height: 32px;
+
   background: #e2dbcd;
+
   border: none;
+
   border-radius: 4px;
+
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   font-size: 0.8rem;
+
   font-weight: bold;
+
   cursor: pointer;
+
+  color: var(--ink);
 }
 
-.key.wide { 
-  flex: 2; 
-  background: var(--ink); 
+
+/* ======================================================
+   TÖRÖL / ENTER
+   ====================================================== */
+
+.key.wide {
+  flex: 2;
+
+  background: var(--ink);
+
   color: var(--bg);
-	font-size: 0.7rem;
+
+  font-size: 0.7rem;
 }
+
+
+/* ======================================================
+   BILLENTYŰZET KIÉRTÉKELT SZÍNEI
+   ====================================================== */
+
+.key.correct {
+  background: var(--correct) !important;
+
+  color: white !important;
+}
+
+
+.key.present {
+  background: var(--present) !important;
+
+  color: white !important;
+}
+
+
+.key.absent {
+  background: var(--absent) !important;
+
+  color: white !important;
+
+  opacity: 0.5;
+}
+
+
+/* ======================================================
+   KISEBB MAGASSÁGÚ KIJELZŐK
+   ====================================================== */
 
 @media (max-height: 600px) {
+
   .key {
     height: 34px;
+
     font-size: 0.78rem;
   }
+
+
   #grid {
     max-width: 220px;
+
     gap: 4px;
   }
+
+
   .cell {
     font-size: 1.2rem;
   }
 }
-
-/* Billentyűzet dinamikus színei */
-.key.correct { background: var(--correct) !important; color: white !important; }
-.key.present { background: var(--present) !important; color: white !important; }
-.key.absent { background: var(--absent) !important; color: white !important; opacity: 0.5; }
