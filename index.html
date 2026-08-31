@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <!-- Mobilra optimalizált nézet: letiltja a véletlen nagyításokat gépelés közben -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Szófejtő</title>
+  <link rel="stylesheet" href="stilus.css">
+</head>
+<body>
+
+  <header>
+    <h1>Szófejtő</h1>
+  </header>
+
+  <div id="game-container">
+    <!-- Ide érkeznek a játék üzenetei (pl. Nincs meg az 5 betű!, Gratulálok!) -->
+    <div id="msg"></div>
+    
+    <!-- Ebbe a dobozba fogja a JavaScript dinamikusan legenerálni a 8 soros rácsot -->
+    <div id="grid"></div>
+    
+    <!-- Magyar virtuális billentyűzet kiosztás, beleértve a többjegyűeket is -->
+    <div id="keyboard">
+      <div class="keyboard-row">
+        <button class="key" data-key="q">Q</button><button class="key" data-key="w">W</button><button class="key" data-key="e">E</button><button class="key" data-key="r">R</button><button class="key" data-key="t">T</button><button class="key" data-key="z">Z</button><button class="key" data-key="u">U</button><button class="key" data-key="i">I</button><button class="key" data-key="o">O</button><button class="key" data-key="p">P</button>
+      </div>
+      <div class="keyboard-row">
+        <button class="key" data-key="a">A</button><button class="key" data-key="s">S</button><button class="key" data-key="d">D</button><button class="key" data-key="f">F</button><button class="key" data-key="g">G</button><button class="key" data-key="h">H</button><button class="key" data-key="j">J</button><button class="key" data-key="k">K</button><button class="key" data-key="l">L</button>
+      </div>
+      <div class="keyboard-row">
+        <button class="key" data-key="y">Y</button><button class="key" data-key="x">X</button><button class="key" data-key="c">C</button><button class="key" data-key="v">V</button><button class="key" data-key="b">B</button><button class="key" data-key="n">N</button><button class="key" data-key="m">M</button>
+        <button class="key wide" data-key="back">TÖRÖL</button>
+      </div>
+      <!-- A kiemelt magyar többjegyű betűk sora -->
+      <div class="keyboard-row">
+        <button class="key" data-key="cs">CS</button><button class="key" data-key="dz">DZ</button><button class="key" data-key="dzs">DZS</button><button class="key" data-key="gy">GY</button><button class="key" data-key="ly">LY</button><button class="key" data-key="ny">NY</button><button class="key" data-key="sz">SZ</button><button class="key" data-key="ty">TY</button><button class="key" data-key="zs">ZS</button>
+      </div>
+      <div class="keyboard-row">
+        <button class="key wide" data-key="enter">ENTER (KÜLDÉS)</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ITT HÍVJUK BE ÉS INDÍTJUK EL A JAVASCRIPT MOTORODAT -->
+  <script src="jatek.js"></script>
+</body>
+</html>
