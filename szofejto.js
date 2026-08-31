@@ -1076,6 +1076,82 @@ if (infoButton && infoModal && closeInfo) {
 }
 
 // ======================================================
+// ÉJFÉLI AUTOMATIKUS RESET
+// ======================================================
+
+function scheduleMidnightReset() {
+
+  const now = new Date();
+
+  const nextMidnight = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1,
+    0, 0, 0, 0
+  );
+
+  const millisecondsUntilMidnight =
+    nextMidnight.getTime() - now.getTime();
+
+  setTimeout(function () {
+
+    resetDailyGame();
+
+    // Következő éjfél beállítása
+    scheduleMidnightReset();
+
+  }, millisecondsUntilMidnight);
+}
+
+
+function resetDailyGame() {
+
+  // Régi napi állapot törlése
+  localStorage.removeItem(STORAGE_KEY);
+
+  // Új játékállapot
+  currentAttempt = 0;
+  currentGuessTokens = [];
+  gameOver = false;
+  isChecking = false;
+
+  // Új napi szó
+  const dailyWord = getDailyWord();
+
+  if (dailyWord) {
+    secretWordTokens = tokenize(dailyWord);
+  }
+
+  // Rács törlése
+  initGrid();
+
+  // Billentyűzet állapotainak törlése
+  document
+    .querySelectorAll('#keyboard .key')
+    .forEach(function (key) {
+
+      key.classList.remove(
+        'correct',
+        'present',
+        'absent'
+      );
+
+    });
+
+  // Üzenet törlése
+  showMsg('');
+}
+
+
+// Indítás
+initGrid();
+
+loadWords();
+
+scheduleMidnightReset();
+
+
+// ======================================================
 // INDÍTÁS
 // ======================================================
 
