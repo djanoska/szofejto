@@ -40,4 +40,9 @@ jobs:
 
           git remote add beta https://github.com/djanoska/szofejto-beta.git
 
-          git push beta HEAD:main --force
+          git checkout --orphan beta-sync
+          git rm -rf .github 2>/dev/null || true
+          git add .
+          git commit -m "Sync UAT to BETA"
+
+          git push beta beta-sync:main --force
