@@ -1049,6 +1049,31 @@ if (keyboard) {
   );
 }
 
+// ======================================================
+// INFORMÁCIÓS POPUP
+// ======================================================
+
+const infoButton = document.getElementById('info-button');
+const infoModal = document.getElementById('info-modal');
+const closeInfo = document.getElementById('close-info');
+
+if (infoButton && infoModal && closeInfo) {
+
+  infoButton.addEventListener('click', function () {
+    infoModal.classList.add('show');
+  });
+
+  closeInfo.addEventListener('click', function () {
+    infoModal.classList.remove('show');
+  });
+
+  infoModal.addEventListener('click', function (e) {
+    if (e.target === infoModal) {
+      infoModal.classList.remove('show');
+    }
+  });
+
+}
 
 // ======================================================
 // INDÍTÁS
