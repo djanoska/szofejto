@@ -3,7 +3,7 @@
   --ink: #23201b;
   --ink-soft: #5c564a;
   --border: #c9bfa8;
-  --correct: #2e5a1c; /* Sikeres találat zöld színe */
+  --correct: #23a942; /* Sikeres találat zöld színe */
   --present: #b38600; /* Jó betű rossz helyen (sárga) */
   --absent: #5c564a;  /* Hibás betű (szürke) */
   --cell-bg: #ffffff;
