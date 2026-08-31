@@ -93,27 +93,28 @@ header h1 {
 #keyboard {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
   width: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 
 .keyboard-row {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 3px;
+	width: 100%;
 }
 
 .key {
   flex: 1;
-  height: 44px;
+  height: 38px;
   background: #e2dbcd;
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   font-weight: bold;
   cursor: pointer;
 }
@@ -121,7 +122,22 @@ header h1 {
 .key.wide { 
   flex: 2; 
   background: var(--ink); 
-  color: var(--bg); 
+  color: var(--bg);
+	font-size: 0.8rem;
+}
+
+@media (max-height: 700px) {
+  .key {
+    height: 34px;
+    font-size: 0.78rem;
+  }
+  #grid {
+    max-width: 260px;
+    gap: 4px;
+  }
+  .cell {
+    font-size: 1.2rem;
+  }
 }
 
 /* Billentyűzet dinamikus színei */
