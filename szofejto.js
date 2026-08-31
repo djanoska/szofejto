@@ -128,45 +128,60 @@ function checkGuess() {
     }
   }
 
- // Megjelenítés és billentyűzet színezés
+  // JAVÍTÁS: Animációk indítása és tűpontos billentyűzet-színezés
   for (let i = 0; i < WORD_LEN; i++) {
     const cell = document.getElementById(`cell-${currentAttempt}-${i}`);
-    if (cell) cell.classList.add(statuses[i]);
+    if (cell) {
+      // 1. Egyszerre adjuk hozzá a státuszt és a .flip osztályt a stabil animációhoz
+      cell.classList.add(statuses[i], 'flip');
+    }
 
-    const currentLetter = guessLower[i]; // A játékos által beírt pontos betű (pl. "á")
+    const currentLetter = guessLower[i]; // A leütött betű pontos karaktere
 
-    // Csak azokat a gombokat keressük meg, amik pontosan erre a betűre hallgatnak
+    // Megkeressük az összes billentyűzet gombot
     const keyBtns = document.querySelectorAll(`#keyboard .key`);
     
     keyBtns.forEach(keyBtn => {
-      // Kiolvassuk a data-key-t, ha nincs, akkor a gomb szövegét használjuk, kisbetűsítve
+      // JAVÍTÁS: Ha a data-key hibás a HTML-ben, a gomb látható feliratát vesszük alapul!
       const btnKeyAttr = keyBtn.getAttribute('data-key');
       const btnKey = (btnKeyAttr ? btnKeyAttr : keyBtn.textContent).trim().toLowerCase();
 
-      // SZIGORÚ EGYEZÉS: Csak a ténylegesen leütött betű gombját bántjuk!
+      // Ha a gomb felirata pontosan megegyezik a beírt betűvel
       if (btnKey === currentLetter) {
         
-        // Wordle szabály: A már zöld (correct) gombot semmi nem írhatja felül
+        // Wordle szabály: Zöld gombot nem írunk felül
         if (!keyBtn.classList.contains('correct')) {
           if (statuses[i] === 'correct') {
             keyBtn.classList.remove('present', 'absent');
             keyBtn.classList.add('correct');
           } else if (statuses[i] === 'present') {
-            // A sárga nem írhatja felül a már meglévő sárgát vagy zöldet
             if (!keyBtn.classList.contains('present')) {
               keyBtn.classList.add('present');
             }
           } else if (statuses[i] === 'absent') {
-            // A szürke csak akkor adódik hozzá, ha a gomb még nem zöld és nem sárga
             if (!keyBtn.classList.contains('present')) {
               keyBtn.classList.add('absent');
             }
           }
         }
-        
       }
     });
   }
+
+  if (guessString === secretWordTokens.join('').toLowerCase()) {
+    showMsg("Gratulálok, eltaláltad!");
+    gameOver = true;
+    return;
+  }
+
+  currentAttempt++;
+  currentGuessTokens = [];
+
+  if (currentAttempt >= MAX_ATTEMPTS) {
+    showMsg(`Vége! A szó: ${secretWordTokens.join('').toUpperCase()}`);
+    gameOver = true;
+  }
+}
 
   if (guessString === secretWordTokens.join('').toLowerCase()) {
     showMsg("Gratulálok, eltaláltad!");
