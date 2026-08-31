@@ -96,6 +96,25 @@ header h1 {
   text-transform: uppercase;
 }
 
+/* ÚJ: Amikor beírsz egy betűt, kap egy kis pulzálást (opcionális, de feldobja a játékot) */
+.cell.pop {
+  animation: popIn 0.1s ease-in-out;
+  border-color: var(--ink);
+}
+
+/* ÚJ: Animáció az ENTER leütése utáni leleplezéshez */
+.cell.flip {
+  animation: flipOver 0.5s ease-in-out forwards;
+}
+
+/* Késleltetések a sorban lévő 5 cellához, hogy egymás után pördüljenek meg */
+.cell.flip:nth-child(1) { animation-delay: 0ms; }
+.cell.flip:nth-child(2) { animation-delay: 150ms; }
+.cell.flip:nth-child(3) { animation-delay: 300ms; }
+.cell.flip:nth-child(4) { animation-delay: 450ms; }
+.cell.flip:nth-child(5) { animation-delay: 600ms; }
+
+/* Színes állapotok – CSAK az animáció közepén kapják meg a színt, hogy ne látszódjon azonnal */
 .cell.correct { background: var(--correct); color: white; border-color: var(--correct); }
 .cell.present { background: var(--present); color: white; border-color: var(--present); }
 .cell.absent { background: var(--absent); color: white; border-color: var(--absent); }
@@ -143,3 +162,35 @@ header h1 {
 .key.present { background: var(--present) !important; color: white !important; }
 .key.absent { background: var(--absent) !important; color: white !important; opacity: 0.5; }
 
+/* --- ANIMÁCIÓS LOGIKÁK (KEYFRAMES) --- */
+
+/* Pördülés animáció: 90 foknál váltunk színt, így nem látszik előre a megoldás */
+@keyframes flipOver {
+  0% {
+    transform: rotateX(0deg);
+    background: var(--cell-bg);
+    border-color: var(--border);
+  }
+  45% {
+    transform: rotateX(90deg);
+    background: var(--cell-bg);
+    border-color: var(--border);
+  }
+  55% {
+    transform: rotateX(90deg);
+    background: var(--target-bg);
+    border-color: var(--target-bg);
+  }
+  100% {
+    transform: rotateX(0deg);
+    background: var(--target-bg);
+    border-color: var(--target-bg);
+  }
+}
+
+/* Betűbeíráskori pulzálás */
+@keyframes popIn {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
