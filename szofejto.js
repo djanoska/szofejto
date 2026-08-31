@@ -143,11 +143,32 @@ function checkGuess() {
     }
   }
 
-  // Osztályok kiosztása a rácson a színekhez - ITT LETT JAVÍTVA A 147. SOR
+   // Osztályok kiosztása a rácson a színekhez
   for (let i = 0; i < WORD_LEN; i++) {
     const cell = document.getElementById(`cell-${currentAttempt}-${i}`);
     if (cell) {
       cell.classList.add(statuses[i]);
+    }
+
+    // ÚJ: A virtuális billentyűzet gombjainak átszínezése
+    const keyBtn = document.querySelector(`#keyboard .key[data-key="${currentGuessTokens[i]}"]`);
+    if (keyBtn) {
+      // Ha már zöld a gomb, ne írjuk felül semmivel
+      if (!keyBtn.classList.contains('correct')) {
+        // Ha most zöld lett, kapja meg a zöldet
+        if (statuses[i] === 'correct') {
+          keyBtn.classList.remove('present', 'absent');
+          keyBtn.classList.add('correct');
+        } 
+        // Ha sárga lett és még nem zöld, kapja meg a sárgát
+        else if (statuses[i] === 'present') {
+          keyBtn.classList.add('present');
+        } 
+        // Ha nincs a szóban és még nincs rajta más státusz, legyen szürke (absent)
+        else if (statuses[i] === 'absent' && !keyBtn.classList.contains('present')) {
+          keyBtn.classList.add('absent');
+        }
+      }
     }
   }
 

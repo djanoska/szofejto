@@ -147,3 +147,20 @@ header h1 {
 .key.wide:active {
   background: var(--accent);
 }
+
+/* Virtuális billentyűzet gombjainak dinamikus állapotai */
+.key.correct {
+  background: var(--correct) !important;
+  color: white !important;
+}
+
+.key.present {
+  background: var(--present) !important;
+  color: white !important;
+}
+
+.key.absent {
+  background: var(--absent) !important;
+  color: white !important;
+  opacity: 0.6; /* Kicsit halványabb lesz, jelezve, hogy inaktív */
+}
