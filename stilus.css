@@ -93,34 +93,27 @@ header h1 {
   font-size: 3vh;
   font-weight: bold;
   text-transform: uppercase;
-  /* Biztosítja a sima 3D forgást mobilokon is */
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
+  color: var(--ink);
 }
 
-/* JAVÍTÁS: A színes osztályok most már CSAK a célszínt definiálják az animációhoz */
-.cell.correct { --target-bg: var(--correct); color: white; }
-.cell.present { --target-bg: var(--present); color: white; }
-.cell.absent { --target-bg: var(--absent); color: white; }
+/* JAVÍTÁS: A színes alapállapotok megmaradnak, ha az animáció lefutott */
+.cell.correct { background: var(--correct); border-color: var(--correct); color: white; }
+.cell.present { background: var(--present); border-color: var(--present); color: white; }
+.cell.absent { background: var(--absent); border-color: var(--absent); color: white; }
 
-/* JAVÍTÁS: Amikor az ellenőrzés fut, a JS-nek hozzá kell adnia a .flip osztályt */
+/* JAVÍTÁS: Törésbiztos 2D animációs osztály */
 .cell.flip {
-  animation: flipOver 0.5s ease-in-out forwards;
+  animation: safeFlip 0.5s ease-in-out forwards;
 }
 
-/* Késleltetések a sorban lévő 5 cellához */
+/* Fokozatos késleltetés a sorban lévő celláknak */
 .cell.flip:nth-child(1) { animation-delay: 0ms; }
-.cell.flip:nth-child(2) { animation-delay: 150ms; }
-.cell.flip:nth-child(3) { animation-delay: 300ms; }
-.cell.flip:nth-child(4) { animation-delay: 450ms; }
-.cell.flip:nth-child(5) { animation-delay: 600ms; }
+.cell.flip:nth-child(2) { animation-delay: 100ms; }
+.cell.flip:nth-child(3) { animation-delay: 200ms; }
+.cell.flip:nth-child(4) { animation-delay: 300ms; }
+.cell.flip:nth-child(5) { animation-delay: 400ms; }
 
-/* Gépeléskori pulzálás */
-.cell.pop {
-  animation: popIn 0.1s ease-in-out;
-  border-color: var(--ink);
-}
-
+/* Billentyűzet stílusok */
 #keyboard {
   display: flex;
   flex-direction: column;
@@ -162,40 +155,17 @@ header h1 {
 .key.present { background: var(--present) !important; color: white !important; }
 .key.absent { background: var(--absent) !important; color: white !important; opacity: 0.5; }
 
-/* --- ANIMÁCIÓS LOGIKÁK --- */
-@keyframes flipOver {
+/* --- ÚJ, STABIL ANIMÁCIÓS LOGIKA --- */
+
+/* Függőleges zsugorítás és tágítás, ami nem töri össze a layoutot */
+@keyframes safeFlip {
   0% {
-    transform: rotateX(0deg);
-    background: var(--cell-bg);
-    border-color: var(--border);
+    transform: scaleY(1);
   }
-  45% {
-    transform: rotateX(90deg);
-    background: var(--cell-bg);
-    border-color: var(--border);
-  }
-  55% {
-    transform: rotateX(90deg);
-    /* Itt váltunk át a JS által beállított célszínre */
-    background: var(--target-bg, var(--cell-bg));
-    border-color: var(--target-bg, var(--border));
+  50% {
+    transform: scaleY(0);
   }
   100% {
-    transform: rotateX(0deg);
-    background: var(--target-bg, var(--cell-bg));
-    border-color: var(--target-bg, var(--border));
+    transform: scaleY(1);
   }
 }
-
-@keyframes popIn {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.15); }
-  100% { transform: scale(1); }
-}
-
-/* PÉLDA LOGIKA AZ ENTER LEÜTÉSEKOR: */
-cellsInCurrentRow.forEach((cell, index) => {
-    // 1. Megállapítod a státuszt (correct/present/absent)
-    // 2. Hozzáadod a státusz osztályt ÉS a .flip osztályt egyszerre:
-    cell.classList.add(status, 'flip'); 
-});
