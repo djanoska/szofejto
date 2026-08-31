@@ -128,27 +128,45 @@ function checkGuess() {
     }
   }
 
-  // Megjelenítés és billentyűzet színezés
+ // Megjelenítés és billentyűzet színezés
   for (let i = 0; i < WORD_LEN; i++) {
     const cell = document.getElementById(`cell-${currentAttempt}-${i}`);
     if (cell) cell.classList.add(statuses[i]);
 
-    // Intelligens gombkeresés az alapbetűk alapján
-    const baseKey = getBaseKey(guessLower[i]);
-    const keyBtn = document.querySelector(`#keyboard .key[data-key='${baseKey}']`);
+    const currentLetter = guessLower[i]; // A tippelt betű kisbetűsen (pl. "é")
+    const baseKey = getBaseKey(currentLetter); // Az alapbetű (pl. "e")
+
+    // JAVÍTÁS: Megkeressük az ÖSSZES gombot, ami az alapbetűhöz VAGY a pontos ékezetes betűhöz tartozik
+    const keyBtns = document.querySelectorAll(`#keyboard .key`);
     
-    if (keyBtn) {
-      if (!keyBtn.classList.contains('correct')) {
-        if (statuses[i] === 'correct') {
-          keyBtn.classList.remove('present', 'absent');
-          keyBtn.classList.add('correct');
-        } else if (statuses[i] === 'present') {
-          keyBtn.classList.add('present');
-        } else if (statuses[i] === 'absent' && !keyBtn.classList.contains('present')) {
-          keyBtn.classList.add('absent');
+    keyBtns.forEach(keyBtn => {
+      // Kiolvassuk a data-key-t, ha nincs, akkor a gomb feliratát használjuk, és kisbetűsítjük
+      const btnKeyAttr = keyBtn.getAttribute('data-key');
+      const btnKey = (btnKeyAttr ? btnKeyAttr : keyBtn.textContent).trim().toLowerCase();
+
+      // Ha a gomb megegyezik a tippelt betűvel (pl. "é") VAGY az alapbetűjével (pl. "e")
+      if (btnKey === currentLetter || btnKey === baseKey) {
+        
+        // Wordle szabály: A már zöld (correct) gombot semmi nem írhatja felül
+        if (!keyBtn.classList.contains('correct')) {
+          if (statuses[i] === 'correct') {
+            keyBtn.classList.remove('present', 'absent');
+            keyBtn.classList.add('correct');
+          } else if (statuses[i] === 'present') {
+            // A sárga nem írhatja felül a már meglévő sárgát vagy zöldet
+            if (!keyBtn.classList.contains('present')) {
+              keyBtn.classList.add('present');
+            }
+          } else if (statuses[i] === 'absent') {
+            // A szürke csak akkor adódik hozzá, ha a gomb még nem zöld és nem sárga
+            if (!keyBtn.classList.contains('present')) {
+              keyBtn.classList.add('absent');
+            }
+          }
         }
+        
       }
-    }
+    });
   }
 
   if (guessString === secretWordTokens.join('').toLowerCase()) {
