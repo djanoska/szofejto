@@ -14,7 +14,46 @@
 
   <header>
     <h1>Szófejtő</h1>
+
+    <button id="info-button" aria-label="Információ">
+        i
+    </button>
+    
   </header>
+
+  <div id="info-modal" class="modal">
+  <div class="modal-content">
+
+    <button id="close-info" class="modal-close" aria-label="Bezárás">
+      ×
+    </button>
+
+    <h2>Szabályokl</h2>
+
+    <p>
+      Találd ki a napi szót. Összesen 8 tipp áll rendelkezésre.
+    </p>
+    
+<div class="example-word">
+  <div class="cell correct">R</div>
+  <div class="cell">É</div>
+  <div class="cell present">T</div>
+  <div class="cell absent">E</div>
+  <div class="cell">S</div>
+</div>
+    
+    <p>
+      Az R betű szerepel a szóban és jó helyen van.<br>A T betű szerepel a szóban de a helye nem megfelelő.<br>Az S betű egyáltalán nem szerepel a szóban.
+    </p>
+
+    <p>
+      A játék a szózat és a wordle mintájára készült.
+    </p>
+
+  </div>
+</div>
+
+  <!-- Fejléc alatt -->
 
     <div id="game-container">
 
