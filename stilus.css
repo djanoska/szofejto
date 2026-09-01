@@ -344,16 +344,20 @@ header {
 
     padding: 0;
 
-    border: 1.5px solid currentColor;
+    border: 1.5px solid #000;
     border-radius: 50%;
 
-    background: transparent;
-    color: inherit;
+    background-color: transparent;
+    color: #000;
 
     cursor: pointer;
 
+    appearance: none;
+    -webkit-appearance: none;
+
     transition:
         background-color 0.2s ease,
+        color 0.2s ease,
         transform 0.2s ease;
 }
 
@@ -369,14 +373,15 @@ header {
 }
 
 #info-button:hover {
-    background: currentColor;
-    color: white;
+    background-color: #000;
+    color: #fff;
     transform: scale(1.05);
 }
 
 #info-button:active {
     transform: scale(0.95);
 }
+
 
 
 /* ======================================================
