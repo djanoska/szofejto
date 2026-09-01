@@ -1,4 +1,3 @@
-```css
 :root {
   --bg: #ffffff;
   --ink: #000000;
@@ -14,22 +13,11 @@
 
   --command: #000000;
   --commandink: #ffffff;
-
-  /* RESPONSIVE MÉRETEK */
-  --game-width: min(100%, 480px);
-  --grid-width: min(82vw, 290px);
-
-  --page-padding: clamp(6px, 1.5vw, 12px);
-  --grid-gap: clamp(3px, 0.8vw, 5px);
-  --keyboard-gap: clamp(2px, 0.7vw, 4px);
-
-  --key-height: clamp(34px, 6.5vh, 46px);
-  --cell-radius: clamp(4px, 1vw, 7px);
 }
 
 
 /* ======================================================
-   ALAP RESET
+   ALAP
    ====================================================== */
 
 * {
@@ -43,10 +31,6 @@
 }
 
 
-/* ======================================================
-   HTML / BODY
-   ====================================================== */
-
 html {
   width: 100%;
   height: 100%;
@@ -57,7 +41,7 @@ html {
 
 body {
   width: 100%;
-  min-height: 100dvh;
+  height: 100dvh;
 
   background: var(--bg);
   color: var(--ink);
@@ -88,30 +72,22 @@ header {
 
   width: 100%;
 
-  flex: 0 0 auto;
-
   padding:
-    clamp(8px, 1.5vh, 14px)
-    max(
-      var(--page-padding),
-      env(safe-area-inset-left)
-    )
-    clamp(8px, 1.5vh, 14px)
-    max(
-      var(--page-padding),
-      env(safe-area-inset-right)
-    );
+    10px
+    12px;
 
   text-align: center;
 
   border-bottom: 1px solid var(--border);
+
+  flex-shrink: 0;
 }
 
 
 header h1 {
-  font-size: clamp(1.35rem, 5vw, 1.8rem);
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
 
-  line-height: 1.1;
+  line-height: 1.2;
 
   font-weight: 700;
 
@@ -120,39 +96,27 @@ header h1 {
 
 
 /* ======================================================
-   JÁTÉK TARTÓ
+   JÁTÉK
    ====================================================== */
 
 #game-container {
-  width: var(--game-width);
+  width: 100%;
+  max-width: 480px;
 
-  flex: 1 1 auto;
+  flex: 1;
 
   min-height: 0;
 
-  display: grid;
-
-  grid-template-rows:
-    auto
-    minmax(0, 1fr)
-    auto;
-
-  align-items: center;
-
   padding:
-    clamp(4px, 1vh, 8px)
-    max(
-      var(--page-padding),
-      env(safe-area-inset-right)
-    )
-    max(
-      4px,
-      env(safe-area-inset-bottom)
-    )
-    max(
-      var(--page-padding),
-      env(safe-area-inset-left)
-    );
+    5px
+    8px
+    max(5px, env(safe-area-inset-bottom))
+    8px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
 
   overflow: hidden;
 }
@@ -165,21 +129,20 @@ header h1 {
 #msg {
   width: 100%;
 
+  height: 18px;
   min-height: 18px;
-
-  padding: 2px 4px;
 
   text-align: center;
 
-  font-size: clamp(0.75rem, 2.8vw, 0.95rem);
+  font-size: clamp(0.75rem, 3vw, 0.95rem);
 
-  line-height: 1.2;
+  line-height: 18px;
 
   font-weight: 600;
 
   color: var(--accent);
 
-  overflow: hidden;
+  flex-shrink: 0;
 }
 
 
@@ -188,10 +151,9 @@ header h1 {
    ====================================================== */
 
 #grid {
-  width: var(--grid-width);
+  width: min(82vw, 290px);
 
   max-width: 100%;
-  max-height: 100%;
 
   margin: auto;
 
@@ -199,12 +161,9 @@ header h1 {
 
   grid-template-rows: repeat(8, 1fr);
 
-  gap: var(--grid-gap);
+  gap: clamp(3px, 0.9vw, 5px);
 
-  aspect-ratio: 5 / 8;
-
-  align-self: center;
-  justify-self: center;
+  flex-shrink: 1;
 }
 
 
@@ -214,14 +173,12 @@ header h1 {
 
 .row {
   width: 100%;
-  min-width: 0;
-  min-height: 0;
 
   display: grid;
 
   grid-template-columns: repeat(5, 1fr);
 
-  gap: var(--grid-gap);
+  gap: clamp(3px, 0.9vw, 5px);
 }
 
 
@@ -231,38 +188,36 @@ header h1 {
 
 .cell {
   width: 100%;
-  min-width: 0;
-  min-height: 0;
 
   aspect-ratio: 1 / 1;
 
+  min-width: 0;
+
   border:
-    clamp(1px, 0.4vw, 1.5px)
+    clamp(1px, 0.35vw, 1.5px)
     solid
     var(--border);
 
-  border-radius: var(--cell-radius);
-
   background: var(--cell-bg);
+
+  border-radius: clamp(4px, 1vw, 6px);
 
   display: flex;
 
   align-items: center;
   justify-content: center;
 
-  font-size: clamp(1rem, 5vw, 1.4rem);
+  font-size: clamp(1rem, 5vw, 1.25rem);
 
   line-height: 1;
 
-  font-weight: 700;
+  font-weight: bold;
 
   text-transform: uppercase;
 
   position: relative;
 
   z-index: 1;
-
-  overflow: hidden;
 }
 
 
@@ -273,7 +228,7 @@ header h1 {
 .cell.correct {
   background: var(--correct);
 
-  color: #ffffff;
+  color: white;
 
   border-color: var(--correct);
 }
@@ -282,7 +237,7 @@ header h1 {
 .cell.present {
   background: var(--present);
 
-  color: #ffffff;
+  color: white;
 
   border-color: var(--present);
 }
@@ -291,7 +246,7 @@ header h1 {
 .cell.absent {
   background: var(--absent);
 
-  color: #ffffff;
+  color: white;
 
   border-color: var(--absent);
 }
@@ -308,15 +263,11 @@ header h1 {
 
   flex-direction: column;
 
-  gap: var(--keyboard-gap);
+  gap: clamp(2px, 0.7vw, 4px);
 
-  padding-top: clamp(3px, 0.8vh, 7px);
+  flex-shrink: 0;
 
-  padding-bottom:
-    max(
-      2px,
-      env(safe-area-inset-bottom)
-    );
+  padding-top: 5px;
 }
 
 
@@ -327,7 +278,7 @@ header h1 {
 
   justify-content: center;
 
-  gap: var(--keyboard-gap);
+  gap: clamp(2px, 0.7vw, 4px);
 }
 
 
@@ -336,21 +287,19 @@ header h1 {
    ====================================================== */
 
 .key {
-  flex: 1 1 0;
+  flex: 1;
 
   min-width: 0;
 
-  height: var(--key-height);
+  height: clamp(34px, 6.5vh, 42px);
 
   padding: 0;
 
-  border: none;
-
-  border-radius: clamp(3px, 0.8vw, 6px);
-
   background: #e2dbcd;
 
-  color: var(--ink);
+  border: none;
+
+  border-radius: clamp(3px, 0.8vw, 5px);
 
   display: flex;
 
@@ -359,13 +308,15 @@ header h1 {
 
   font-family: inherit;
 
-  font-size: clamp(0.68rem, 2.5vw, 0.95rem);
+  font-size: clamp(0.62rem, 2.4vw, 0.9rem);
 
   line-height: 1;
 
-  font-weight: 700;
+  font-weight: bold;
 
   cursor: pointer;
+
+  color: var(--ink);
 
   touch-action: manipulation;
 
@@ -377,6 +328,7 @@ header h1 {
 
 .key:active {
   transform: scale(0.94);
+
   filter: brightness(0.92);
 }
 
@@ -386,24 +338,24 @@ header h1 {
    ====================================================== */
 
 .key.wide {
-  flex: 2 1 0;
+  flex: 2;
 
   background: var(--command);
 
   color: var(--commandink);
 
-  font-size: clamp(0.65rem, 2.4vw, 0.9rem);
+  font-size: clamp(0.62rem, 2.3vw, 0.9rem);
 }
 
 
 /* ======================================================
-   BILLENTYŰZET KIÉRTÉKELT SZÍNEI
+   BILLENTYŰZET SZÍNEK
    ====================================================== */
 
 .key.correct {
   background: var(--correct) !important;
 
-  color: #ffffff !important;
+  color: white !important;
 
   opacity: 1;
 }
@@ -412,7 +364,7 @@ header h1 {
 .key.present {
   background: var(--present) !important;
 
-  color: #ffffff !important;
+  color: white !important;
 
   opacity: 1;
 }
@@ -421,7 +373,7 @@ header h1 {
 .key.absent {
   background: var(--absent) !important;
 
-  color: #ffffff !important;
+  color: white !important;
 
   opacity: 0.5;
 }
@@ -435,10 +387,7 @@ header h1 {
   position: absolute;
 
   top: 50%;
-  right: max(
-    10px,
-    env(safe-area-inset-right)
-  );
+  right: 12px;
 
   transform: translateY(-50%);
 
@@ -475,8 +424,8 @@ header h1 {
 
 
 #info-button svg {
-  width: clamp(19px, 5vw, 22px);
-  height: clamp(19px, 5vw, 22px);
+  width: 21px;
+  height: 21px;
 
   display: block;
 
@@ -500,45 +449,44 @@ header h1 {
 
 
 #info-button:hover {
-  background: var(--accent);
+  background-color: var(--accent);
 
-  color: #ffffff;
+  color: white;
 
-  transform: translateY(-50%) scale(1.05);
+  transform:
+    translateY(-50%)
+    scale(1.05);
 }
 
 
 #info-button:active {
-  transform: translateY(-50%) scale(0.94);
+  transform:
+    translateY(-50%)
+    scale(0.95);
 }
 
 
 /* ======================================================
-   MODAL
+   INFORMÁCIÓS POPUP
    ====================================================== */
 
 .modal {
-  position: fixed;
+  display: none;
 
-  inset: 0;
+  position: fixed;
 
   z-index: 1000;
 
-  display: none;
+  inset: 0;
+
+  padding:
+    20px;
+
+  background:
+    rgba(35, 32, 27, 0.45);
 
   align-items: center;
   justify-content: center;
-
-  padding:
-    max(16px, env(safe-area-inset-top))
-    max(16px, env(safe-area-inset-right))
-    max(16px, env(safe-area-inset-bottom))
-    max(16px, env(safe-area-inset-left));
-
-  background: rgba(35, 32, 27, 0.45);
-
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
 }
 
 
@@ -547,22 +495,19 @@ header h1 {
 }
 
 
-/* ======================================================
-   MODAL TARTALOM
-   ====================================================== */
-
 .modal-content {
   position: relative;
 
-  width: min(100%, 400px);
+  width: 100%;
 
-  max-height: min(80vh, 600px);
+  max-width: 400px;
+
+  max-height: 80vh;
 
   overflow-y: auto;
 
   padding:
-    clamp(22px, 5vw, 28px)
-    clamp(18px, 5vw, 24px);
+    28px 24px;
 
   background: var(--cell-bg);
 
@@ -572,32 +517,29 @@ header h1 {
     1px solid
     var(--border);
 
-  border-radius: clamp(8px, 2vw, 12px);
+  border-radius: 10px;
 
   box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.2);
-
-  -webkit-overflow-scrolling: touch;
+    0 10px 30px
+    rgba(0, 0, 0, 0.2);
 }
 
 
 .modal-content h2 {
-  margin-bottom: clamp(14px, 3vw, 18px);
+  margin-bottom: 18px;
 
   color: var(--accent);
 
-  font-size: clamp(1.15rem, 5vw, 1.3rem);
-
-  line-height: 1.2;
+  font-size: 1.3rem;
 }
 
 
 .modal-content p {
-  margin-bottom: clamp(9px, 2.5vw, 12px);
-
-  font-size: clamp(0.82rem, 3vw, 0.9rem);
+  margin-bottom: 12px;
 
   line-height: 1.5;
+
+  font-size: 0.9rem;
 }
 
 
@@ -608,11 +550,11 @@ header h1 {
 .modal-close {
   position: absolute;
 
-  top: 7px;
-  right: 9px;
+  top: 8px;
+  right: 10px;
 
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
 
   padding: 0;
 
@@ -622,19 +564,11 @@ header h1 {
 
   color: var(--ink);
 
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 
   line-height: 1;
 
-  display: flex;
-
-  align-items: center;
-  justify-content: center;
-
   cursor: pointer;
-
-  appearance: none;
-  -webkit-appearance: none;
 }
 
 
@@ -644,12 +578,10 @@ header h1 {
 
 
 /* ======================================================
-   POPUP PÉLDA SZÓ
+   POPUP PÉLDA
    ====================================================== */
 
 .example-word {
-  width: 100%;
-
   display: flex;
 
   flex-direction: row;
@@ -660,7 +592,7 @@ header h1 {
 
   gap: clamp(6px, 3vw, 12px);
 
-  flex-wrap: nowrap;
+  margin-bottom: 12px;
 }
 
 
@@ -672,21 +604,103 @@ header h1 {
   aspect-ratio: 1;
 
   flex: 0 0 auto;
-
-  font-size: clamp(0.9rem, 4vw, 1.2rem);
 }
 
 
 /* ======================================================
-   TABLET / KISEBB DESKTOP
+   KIS MAGASSÁGÚ KIJELZŐ
    ====================================================== */
 
-@media (min-width: 600px) {
+@media (max-height: 650px) {
 
-  :root {
-    --grid-width: min(60vw, 290px);
+  header {
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
+
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+
+  #msg {
+    height: 14px;
+    min-height: 14px;
+
+    line-height: 14px;
+
+    font-size: 0.72rem;
+  }
+
+
+  #grid {
+    width: min(42vh, 230px);
+  }
+
+
+  .key {
+    height: clamp(30px, 7vh, 36px);
+
+    font-size: 0.72rem;
+  }
+
+
+  #keyboard {
+    padding-top: 3px;
+  }
+}
+
+
+/* ======================================================
+   NAGYON ALACSONY / FEKVŐ MOBIL
+   ====================================================== */
+
+@media (max-height: 500px) {
+
+  header {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+
+
+  header h1 {
+    font-size: 1.1rem;
+  }
+
+
+  #grid {
+    width: min(37vh, 190px);
+
+    gap: 3px;
+  }
+
+
+  .row {
+    gap: 3px;
+  }
+
+
+  .cell {
+    font-size: 1rem;
+  }
+
+
+  .key {
+    height: 29px;
+
+    font-size: 0.65rem;
+  }
+
+
+  #keyboard {
+    gap: 2px;
+  }
+
+
+  .keyboard-row {
+    gap: 2px;
+  }
 }
 
 
@@ -694,133 +708,32 @@ header h1 {
    NAGY DESKTOP
    ====================================================== */
 
-@media (min-width: 900px) {
-
-  :root {
-    --grid-width: min(290px, 32vh);
-  }
+@media (min-width: 700px) {
 
   #game-container {
-    padding-top: 8px;
-    padding-bottom: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
+
+  #grid {
+    width: 290px;
+  }
 }
 
 
 /* ======================================================
-   ALACSONY KIJELZŐ
-   ====================================================== */
-
-@media (max-height: 700px) {
-
-  :root {
-    --grid-width: min(46vh, 260px);
-  }
-
-  header {
-    padding-top: 7px;
-    padding-bottom: 7px;
-  }
-
-  #msg {
-    min-height: 15px;
-  }
-
-}
-
-
-/* ======================================================
-   NAGYON ALACSONY KIJELZŐ
-   ====================================================== */
-
-@media (max-height: 550px) {
-
-  :root {
-    --grid-width: min(40vh, 210px);
-    --key-height: clamp(30px, 8vh, 38px);
-  }
-
-  header h1 {
-    font-size: 1.25rem;
-  }
-
-  #msg {
-    min-height: 13px;
-    font-size: 0.72rem;
-  }
-
-  #keyboard {
-    padding-top: 2px;
-  }
-
-}
-
-
-/* ======================================================
-   ÁLLÓ MOBIL
-   ====================================================== */
-
-@media (max-width: 480px) and (orientation: portrait) {
-
-  :root {
-    --grid-width: min(82vw, 290px);
-  }
-
-}
-
-
-/* ======================================================
-   FEKVŐ MOBIL
-   ====================================================== */
-
-@media (max-width: 900px) and (orientation: landscape) {
-
-  :root {
-    --grid-width: min(38vh, 250px);
-    --key-height: clamp(28px, 9vh, 38px);
-  }
-
-  header {
-    padding-top: 5px;
-    padding-bottom: 5px;
-  }
-
-  header h1 {
-    font-size: 1.2rem;
-  }
-
-  #msg {
-    min-height: 13px;
-    font-size: 0.7rem;
-  }
-
-  #keyboard {
-    padding-top: 2px;
-  }
-
-  .key {
-    font-size: 0.72rem;
-  }
-
-}
-
-
-/* ======================================================
-   BILLENTYŰZET / ÉRINTÉS
+   ÉRINTŐKÉPERNYŐ
    ====================================================== */
 
 @media (hover: none) {
 
-  .key:hover {
-    filter: none;
-  }
-
   #info-button:hover {
     background: transparent;
-    color: var(--accent);
-    transform: translateY(-50%);
-  }
 
+    color: var(--accent);
+
+    transform:
+      translateY(-50%);
+  }
 }
-```
