@@ -335,35 +335,47 @@ header {
 }
 
 #info-button {
-  position: absolute;
+    width: 36px;
+    height: 36px;
 
-  right: 14px;
-  top: 50%;
-  transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  width: 28px;
-  height: 28px;
+    padding: 0;
 
-  border: 1px solid var(--border);
-  border-radius: 50%;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
 
-  background: transparent;
-  color: var(--ink);
+    background: transparent;
+    color: inherit;
 
-  font-family: Georgia, serif;
-  font-size: 0.95rem;
-  font-weight: bold;
+    cursor: pointer;
 
-  cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+#info-button svg {
+    width: 20px;
+    height: 20px;
+
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
 
 #info-button:hover {
-  background: var(--ink);
-  color: var(--bg);
+    background: currentColor;
+    color: white;
+    transform: scale(1.05);
+}
+
+#info-button:active {
+    transform: scale(0.95);
 }
 
 
