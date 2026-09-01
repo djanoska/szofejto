@@ -1,14 +1,15 @@
 :root {
-  --bg: #f5f2eb;
-  --ink: #23201b;
-  --border: #c9bfa8;
-  --correct: #23a942;
-  --present: #b38600;
-  --absent: #5c564a;
+  --bg: #ffffff;
+  --ink: #000000;
+  --border: #07070794;
+  --correct: #1dbb41;
+  --present: #ffa200;
+  --absent: #707070;
   --cell-bg: #ffffff;
-  --accent: #2b0202;
+  --accent: #00043d;
+  --command: #000000;
+  --commandink: #ffffff;
 }
-
 
 /* ======================================================
    ALAP
@@ -21,7 +22,7 @@
 
   user-select: none;
   -webkit-user-select: none;
-}
+  }
 
 
 body {
@@ -265,11 +266,11 @@ header h1 {
 .key.wide {
   flex: 2;
 
-  background: var(--ink);
+  background: var(--command);
 
-  color: var(--bg);
+  color: var(--commandink);
 
-  font-size: 0.7rem;
+  font-size: 0.9rem;
 }
 
 
